@@ -8,9 +8,9 @@
         body {
             margin: 0;
             min-height: 100vh;
-            background: linear-gradient(#2e2e2e, #1c1c1c);
+            background: radial-gradient(circle at top, #4a4a4a, #1e1e1e);
             font-family: "Georgia", serif;
-            color: #eee;
+            color: #eaeaea;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -19,37 +19,49 @@
         .museo {
             width: 90%;
             max-width: 1200px;
-            background: #3b3b3b;
-            padding: 40px;
-            box-shadow: inset 0 0 100px rgba(0,0,0,0.7);
+            padding: 50px;
+            background: #2f2f2f;
+            box-shadow: inset 0 0 120px rgba(0,0,0,0.8);
         }
 
         h1 {
             text-align: center;
-            margin-bottom: 40px;
-            letter-spacing: 3px;
+            letter-spacing: 4px;
+            margin-bottom: 50px;
+            font-weight: normal;
         }
 
         .galeria {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 50px;
         }
 
         .marco {
-            background: #5a3e1b;
-            padding: 15px;
-            border: 8px solid #3b260f;
-            box-shadow: 
-                inset 0 0 15px rgba(0,0,0,0.7),
-                0 10px 20px rgba(0,0,0,0.6);
+            background: #6b4a1e;
+            padding: 18px;
+            border: 10px solid #3e2a10;
+            box-shadow:
+                inset 0 0 20px rgba(0,0,0,0.6),
+                0 15px 30px rgba(0,0,0,0.7);
         }
 
         .marco img {
-            width: 100%;
-            height: auto;
             display: block;
-            border: 3px solid #111;
+            max-width: 280px; /* se adapta al tamaño real */
+            height: auto;
+            border: 4px solid #111;
+            background: #000;
+        }
+
+        /* Marcos vacíos (para misterio) */
+        .marco.vacio {
+            width: 280px;
+            height: 180px;
+            background: #2a1a0a;
+            border-style: dashed;
+            opacity: 0.5;
         }
     </style>
 </head>
@@ -59,25 +71,27 @@
         <h1>Galería</h1>
 
         <div class="galeria">
+
             <!-- Pintura 1 -->
             <div class="marco">
-                <img src="img/Morning_peasant_couple_going_to_work.jpg" alt="1">
+                <img src="img/Morning_peasant_couple_going_to_work.jpg" alt="Pintura 1">
             </div>
 
             <!-- Pintura 2 -->
             <div class="marco">
-                <img src="img/Underground_with_two_figures.jpg" alt="2">
+                <img src="img/Underground_with_two_figures.jpg" alt="Pintura 2">
             </div>
 
             <!-- Pintura 3 -->
             <div class="marco">
-                <img src="img/Evening_the_watch.jpg" alt="3">
+                <img src="img/Evening_the_watch.jpg" alt="Pintura 3">
             </div>
 
-            <!-- Espacios reservados para las siguientes -->
-            <div class="marco"></div>
-            <div class="marco"></div>
-            <div class="marco"></div>
+            <!-- Espacios reservados -->
+            <div class="marco vacio"></div>
+            <div class="marco vacio"></div>
+            <div class="marco vacio"></div>
+
         </div>
     </div>
 
