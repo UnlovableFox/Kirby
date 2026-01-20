@@ -1,126 +1,85 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Galería</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background: linear-gradient(#2b2b2b, #1a1a1a);
-      font-family: 'Georgia', serif;
-      color: #e6e6e6;
-    }
+    <meta charset="UTF-8">
+    <title>Galería</title>
 
-    .sala {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 40px 20px;
-      text-align: center;
-    }
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: linear-gradient(#2e2e2e, #1c1c1c);
+            font-family: "Georgia", serif;
+            color: #eee;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-    h1 {
-      letter-spacing: 3px;
-      margin-bottom: 40px;
-      font-weight: normal;
-    }
+        .museo {
+            width: 90%;
+            max-width: 1200px;
+            background: #3b3b3b;
+            padding: 40px;
+            box-shadow: inset 0 0 100px rgba(0,0,0,0.7);
+        }
 
-    .galeria {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 40px;
-    }
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            letter-spacing: 3px;
+        }
 
-    .marco {
-      background: #3a2f1f;
-      padding: 18px;
-      border: 6px solid #8b6a3e;
-      box-shadow:
-        inset 0 0 10px rgba(0,0,0,0.6),
-        0 10px 25px rgba(0,0,0,0.6);
-    }
+        .galeria {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
 
-    .lienzo {
-      background: #111;
-      width: 100%;
-      aspect-ratio: 4 / 5;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #666;
-      font-size: 0.9em;
-    }
+        .marco {
+            background: #5a3e1b;
+            padding: 15px;
+            border: 8px solid #3b260f;
+            box-shadow: 
+                inset 0 0 15px rgba(0,0,0,0.7),
+                0 10px 20px rgba(0,0,0,0.6);
+        }
 
-    .placa {
-      margin-top: 12px;
-      font-size: 0.85em;
-      color: #cfcfcf;
-    }
-
-    /* Ambientación museo */
-    .sombra-superior {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 120px;
-      background: linear-gradient(rgba(0,0,0,0.6), transparent);
-      pointer-events: none;
-    }
-
-    @media (max-width: 900px) {
-      .galeria {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 600px) {
-      .galeria {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+        .marco img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border: 3px solid #111;
+        }
+    </style>
 </head>
 <body>
-  <div class="sombra-superior"></div>
 
-  <div class="sala">
-    <h1>SALA DE EXPOSICIÓN</h1>
+    <div class="museo">
+        <h1>Galería</h1>
 
-    <div class="galeria">
-      <div class="marco">
-        <div class="lienzo">Pintura 1</div>
-        <div class="placa">Título / Autor</div>
-      </div>
+        <div class="galeria">
+            <!-- Pintura 1 -->
+            <div class="marco">
+                <img src="img/Morning_peasant_couple_going_to_work.jpg" alt="1">
+            </div>
 
-      <div class="marco">
-        <div class="lienzo">Pintura 2</div>
-        <div class="placa">Título / Autor</div>
-      </div>
+            <!-- Pintura 2 -->
+            <div class="marco">
+                <img src="img/Underground_with_two_figures.jpg" alt="2">
+            </div>
 
-      <div class="marco">
-        <div class="lienzo">Pintura 3</div>
-        <div class="placa">Título / Autor</div>
-      </div>
+            <!-- Pintura 3 -->
+            <div class="marco">
+                <img src="img/Evening_the_watch.jpg" alt="3">
+            </div>
 
-      <div class="marco">
-        <div class="lienzo">Pintura 4</div>
-        <div class="placa">Título / Autor</div>
-      </div>
-
-      <div class="marco">
-        <div class="lienzo">Pintura 5</div>
-        <div class="placa">Título / Autor</div>
-      </div>
-
-      <div class="marco">
-        <div class="lienzo">Pintura 6</div>
-        <div class="placa">Título / Autor</div>
-      </div>
+            <!-- Espacios reservados para las siguientes -->
+            <div class="marco"></div>
+            <div class="marco"></div>
+            <div class="marco"></div>
+        </div>
     </div>
 
-    <!-- Algunas obras no se aprecian a simple vista -->
-  </div>
 </body>
 </html>
