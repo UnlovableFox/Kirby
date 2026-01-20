@@ -126,9 +126,20 @@
     
 <script>
 function verificarClave() {
-    const valor = document.getElementById("clave").value.trim().toLowerCase();
+    const valor = document.getElementById("clave")
+        .value
+        .trim()
+        .toLowerCase();
 
-    if (valor === "van gogh") {
+    const titulo = document.getElementById("titulo");
+
+    if (
+        valor === "vincent" ||
+        valor === "van gogh" ||
+        valor === "vincent van gogh"
+    ) {
+        // Cambia el título
+        titulo.textContent = "Galería de Van Gogh";
         document.querySelectorAll(".marco").forEach(marco => {
             marco.classList.add("revelado");
 
@@ -144,12 +155,12 @@ function verificarClave() {
 <body>
 
     <div class="museo">
-        <h1>Galería</h1>
+        <h1 id="titulo">Galería de...</h1>
 
         <div class="galeria">
 
             <div class="llave">
-                <input type="text" id="clave" placeholder="Ingresa un nombre">
+                <input type="text" id="clave" placeholder="Ingresa su nombre">
                 <button onclick="verificarClave()">Ingresar</button>
             </div>
 
