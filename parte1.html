@@ -1,0 +1,72 @@
+<!-- ===== nivel-1.html (Plantilla base de nivel) ===== -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Nivel 1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background: #0b0b0b;
+      color: #e0e0e0;
+      font-family: 'Courier New', monospace;
+      padding: 40px;
+    }
+    input {
+      background: #111;
+      border: 1px solid #444;
+      color: #fff;
+      padding: 8px;
+      width: 300px;
+    }
+    button {
+      margin-top: 10px;
+      padding: 8px 20px;
+      background: #222;
+      border: 1px solid #666;
+      color: #fff;
+      cursor: pointer;
+    }
+    #output {
+      margin-top: 20px;
+      color: #9cff9c;
+    }
+  </style>
+</head>
+<body>
+  <h1>NIVEL 1</h1>
+  <p>Pista:</p>
+  <p><em>Todo inicio tiene un nombre. A veces es el mismo de siempre.</em></p>
+
+  <input type="text" id="key" placeholder="Introduce la llave">
+  <br>
+  <button onclick="checkKey()">Verificar</button>
+
+  <div id="output"></div>
+
+  <script>
+    function normalize(text) {
+      return text
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/\p{Diacritic}/gu, '');
+    }
+
+    function checkKey() {
+      const input = normalize(document.getElementById('key').value);
+      const output = document.getElementById('output');
+
+      // Valor esperado (no es la llave en texto plano)
+      const expected = 'origen'.split('').reverse().join('');
+
+      if (input.split('').reverse().join('') === expected) {
+        output.innerText = 'Recompensa: rujlqh'; // "origen" cifrado César +3
+      } else {
+        output.innerText = 'No es correcto.';
+      }
+    }
+
+    // pista oculta: 6f 72 69 67 65 6e
+  </script>
+</body>
+</html>
