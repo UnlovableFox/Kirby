@@ -71,9 +71,37 @@
         .volver:hover {
             background: #7d5a2b;
         }
+
+        .nombre {
+            display: none;
+            text-align: center;
+            margin-top: 8px;
+            font-style: italic;
+            color: #eae4d3;
+        }
+
+        .revelado .nombre {
+            display: block;
+        }
+        
     </style>
 </head>
-     
+    
+    <script>
+function verificarClave() {
+    const valor = document.getElementById("clave").value.trim().toLowerCase();
+
+    if (valor === "van gogh") {
+        document.querySelectorAll(".marco").forEach(marco => {
+            marco.classList.add("revelado");
+            const img = marco.querySelector("img");
+            const nombre = marco.querySelector(".nombre");
+            nombre.textContent = img.dataset.nombre;
+        });
+    }
+}
+</script>
+    
 <body>
 
     <div class="museo">
@@ -81,34 +109,45 @@
 
         <div class="galeria">
 
+            <div class="llave">
+                <input type="text" id="clave" placeholder="Ingresa un nombre">
+                <button onclick="verificarClave()">Ingresar</button>
+            </div>
+
             <!-- Pintura 1 -->
             <div class="marco">
-                <img src="img/Morning_peasant_couple_going_to_work.jpg" alt="Pintura 1">
+                <img src="img/Morning_peasant_couple_going_to_work.jpg" alt="Pintura 1"> data-nombre="Morning_peasant_couple_going_to_work">
+                <span class="nombre"></span>
             </div>
 
             <!-- Pintura 2 -->
             <div class="marco">
-                <img src="img/Underground_with_two_figures.jpg" alt="Pintura 2">
+                <img src="img/Underground_with_two_figures.jpg" alt="Pintura 2"> data-nombre="Underground_with_two_figures">
+                <span class="nombre"></span>
             </div>
 
             <!-- Pintura 3 -->
             <div class="marco">
-                <img src="img/Evening_the_watch.jpg" alt="Pintura 3">
+                <img src="img/Evening_the_watch.jpg" alt="Pintura 3"> data-nombre="Evening_the_watch">
+                <span class="nombre"></span>
             </div>
 
             <!-- Pintura 4 -->
             <div class="marco">
-                <img src="img/Road_with_cypress_and_star.jpg" alt="Pintura 4">
+                <img src="img/Road_with_cypress_and_star.jpg" alt="Pintura 4"> data-nombre="Road_with_cypress_and_star">
+                <span class="nombre"></span>
             </div>
 
             <!-- Pintura 5 -->
             <div class="marco">
-                <img src="img/Two_lovers.jpg" alt="Pintura 5">
+                <img src="img/Two_lovers.jpg" alt="Pintura 5"> data-nombre="Two_lovers">
+                <span class="nombre"></span>
             </div>
 
             <!-- Pintura 6 -->
             <div class="marco">
-                <img src="img/Entrance_to_the_public_park_in_arles.jpg" alt="Pintura 6">
+                <img src="img/Entrance_to_the_public_park_in_arles.jpg" alt="Pintura 6"> data-nombre="Entrance_to_the_public_park_in_arles">
+                <span class="nombre"></span>
             </div>
             
             <button class="volver" onclick="history.back()">Volver</button>
