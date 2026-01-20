@@ -80,7 +80,8 @@
             color: #eae4d3;
         }
 
-        .revelado .nombre {
+        /* SOLO aparece al pasar el mouse, y solo si está desbloqueado */
+        .revelado:hover .nombre {
             display: block;
         }
 
@@ -123,13 +124,14 @@
     </style>
 </head>
     
-    <script>
+<script>
 function verificarClave() {
     const valor = document.getElementById("clave").value.trim().toLowerCase();
 
     if (valor === "van gogh") {
         document.querySelectorAll(".marco").forEach(marco => {
             marco.classList.add("revelado");
+
             const img = marco.querySelector("img");
             const nombre = marco.querySelector(".nombre");
             nombre.textContent = img.dataset.nombre;
@@ -137,6 +139,7 @@ function verificarClave() {
     }
 }
 </script>
+
     
 <body>
 
