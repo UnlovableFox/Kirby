@@ -1,4 +1,4 @@
-<!-- ===== nivel-1.html (Plantilla base de nivel) ===== -->
+<!-- ===== nivel-1.html ===== -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -61,11 +61,10 @@
       if (input.split('').reverse().join('') === expected) {
         output.innerText = 'Recompensa: rujlqh'; // "origen" cifrado César +3
       } else {
-        output.innerText = 'No es correcto.';
+        output.innerText = 'Intentalo de nuevo.';
       }
     }
 
-    // pista oculta: 6f 72 69 67 65 6e
   </script>
 </body>
 </html>
