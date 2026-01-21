@@ -5,109 +5,117 @@
 <title>Amor</title>
 
 <style>
-  body {
-    margin: 0;
-    background:
-      radial-gradient(circle at 20% 30%, rgba(160,0,0,0.25), transparent 40%),
-      radial-gradient(circle at 80% 60%, rgba(140,0,0,0.15), transparent 45%),
-      linear-gradient(135deg, #040000, #120000);
-    background-size: 200% 200%;
-    animation: venas 18s ease-in-out infinite;
-    color: #d9d9d9;
-    font-family: Arial, sans-serif;
-  }
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(160,0,0,0.25), transparent 40%),
+    radial-gradient(circle at 80% 60%, rgba(140,0,0,0.15), transparent 45%),
+    linear-gradient(135deg, #040000, #120000);
+  background-size: 200% 200%;
+  animation: venas 18s ease-in-out infinite;
+  color: #d9d9d9;
+  font-family: Arial, sans-serif;
+}
 
-  @keyframes venas {
-    0%   { background-position: 0% 50%; }
-    50%  { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
+@keyframes venas {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
-  .sala {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 100vh;
-    padding: 40px;
-  }
+/* Contenedor general */
+.procedimiento {
+  min-height: 100vh;
+}
 
-  .lado {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
+/* Latido del fondo */
+.procedimiento.latido {
+  animation: pulso 1.8s ease-in-out infinite;
+}
 
-  .lado img {
-    width: 140px;
-    filter: grayscale(100%);
-    opacity: 0.85;
-  }
+@keyframes pulso {
+  0%   { filter: brightness(1); }
+  50%  { filter: brightness(1.08); }
+  100% { filter: brightness(1); }
+}
 
-  .corazon {
-    max-width: 300px;
-  }
+.sala {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+  padding: 40px;
+}
 
-  .corazon img {
-    width: 100%;
-    filter: contrast(110%);
-  }
+.lado {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
 
-  .corazon img {
-    transition: transform 0.6s ease;
-  }
+.lado img {
+  width: 140px;
+  filter: grayscale(100%);
+  opacity: 0.85;
+}
 
-  .corazon:hover img {
-    transform: scale(1.03);
-  }
+.corazon {
+  max-width: 300px;
+}
 
-/* Palpitación del fondo */
-  .corazon:hover ~ * {
-    animation: none;
-  }
-<div class="procedimiento">
-  .procedimiento {
-    min-height: 100vh;
-  }
+.corazon img {
+  width: 100%;
+  filter: contrast(110%);
+  transition: transform 0.6s ease;
+  cursor: pointer;
+}
 
-  .corazon:hover ~ .procedimiento,
-  .procedimiento:hover {
-    animation: pulso 1.8s ease-in-out infinite;
-  }
-
-  @keyframes pulso {
-    0%   { filter: brightness(1); }
-    50%  { filter: brightness(1.08); }
-    100% { filter: brightness(1); }
-  }
-  </div>
-  
+.corazon:hover img {
+  transform: scale(1.04);
+}
 </style>
 </head>
 
 <body>
 
-<div class="sala">
-  
-  <!-- Izquierda -->
-  <div class="lado">
-    <img src="img/persona1.jpg">
-    <img src="img/persona2.jpg">
-    <img src="img/persona3.jpg">
-  </div>
+<div class="procedimiento" id="procedimiento">
 
-  <!-- Corazón -->
-  <div class="corazon">
-    <img src="img/corazón.png">
-  </div>
+  <div class="sala">
 
-  <!-- Derecha -->
-  <div class="lado">
-    <img src="img/persona4.jpg">
-    <img src="img/persona5.jpg">
-    <img src="img/persona6.jpg">
+    <!-- Izquierda -->
+    <div class="lado">
+      <img src="img/persona1.jpg">
+      <img src="img/persona2.jpg">
+      <img src="img/persona3.jpg">
+    </div>
+
+    <!-- Corazón -->
+    <div class="corazon"
+      onmouseenter="activarLatido()"
+      onmouseleave="desactivarLatido()">
+      <img src="img/corazon.png">
+    </div>
+
+    <!-- Derecha -->
+    <div class="lado">
+      <img src="img/persona4.jpg">
+      <img src="img/persona5.jpg">
+      <img src="img/persona6.jpg">
+    </div>
+
   </div>
 
 </div>
+
+<script>
+function activarLatido() {
+  document.getElementById("procedimiento").classList.add("latido");
+}
+
+function desactivarLatido() {
+  document.getElementById("procedimiento").classList.remove("latido");
+}
+</script>
 
 </body>
 </html>
