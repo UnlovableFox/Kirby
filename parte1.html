@@ -51,7 +51,7 @@
   </p></em>
   <input type="text" id="key" placeholder="Introduce la llave">
   <br>
-  <button onclick="checkKey()">Verificar</button>
+  <button onclick="verificarClave()">Verificar</button>
 
   <p id="output"></p>
 
@@ -64,7 +64,7 @@
     }
 
     function verificarClave() {
-      const valor = document.getElementById("clave")
+      const valor = normalize(document.getElementById("key").value);
         .value
         .trim()
         .toLowerCase();
@@ -72,7 +72,7 @@
      const output = document.getElementById("output");
       
       if (valor === "muerte") {
-        output.innerText = 'Recompensa: rujlqh'; 
+        output.innerText = 'Recompensa: Eres lo suficientemente buena para un verdadero acertijo, espera para conseguir el segundo verso.'; 
       } else {
         output.innerText = 'No es la respuesta que busco...';
       }
