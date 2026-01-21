@@ -1,9 +1,9 @@
-<!-- ===== nivel-1.html ===== -->
+<!-- ===== nivel-2.html ===== -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Primer Verso</title>
+  <title>Segundo Verso</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
@@ -42,12 +42,13 @@
   </style>
 </head>
 <body>
-  <h1>VERSO 1</h1>
+  <h1>VERSO 2</h1>
   <p><em>
-  Todo comienza en algun lugar, es algo natural en nosotros buscar el origen de todo, ahora te pregunto ¿ En qué inicia el 
-  <span class="arte-oculto" onclick="location.href='galeria.html'" style="cursor:pointer;">
-    Arte
-  </span>?
+  Algunas personas lo explican por procesos quimicos e incluso piensan que no es algo mas que un sentimiento, la verdad es que lo que dice el   
+  <span class="arte-oculto" onclick="location.href='amor.html'" style="cursor:pointer;">
+    corazón
+  </span>
+   no se puede esconder y mucho menos camuflar; ver el mundo como ellos lo hacen es el objetivo de muchos
   </p></em>
   <input type="text" id="key" placeholder="Introduce la llave">
   <br>
@@ -70,7 +71,7 @@
       
      const output = document.getElementById("output");
       
-      if (valor === "muerte") {
+      if (valor === "enamorados" || valor === "los enamorados") {
         output.innerText = 'Recompensa: Eres lo suficientemente buena para un verdadero acertijo, espera para conseguir el segundo verso.'; 
       } else {
         output.innerText = 'No es la respuesta que busco...';
