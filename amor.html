@@ -114,8 +114,9 @@ body {
 
 .zonas-libres {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  gap: 30px;
+  gap: 25px;
   margin-top: 30px;
 }
 
@@ -251,8 +252,11 @@ document.querySelectorAll(".dropzone").forEach(zone => {
   zone.addEventListener("drop", e => {
     e.preventDefault();
     zone.style.outline = "none";
+
+  // 🚫 si ya hay un papel dentro, no permitir otro
+    if (zone.querySelector(".papel-viejo")) return;
+
     if (elementoArrastrado) {
-      zone.innerHTML = "";
       zone.appendChild(elementoArrastrado);
     }
   });
