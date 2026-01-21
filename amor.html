@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Amor</title>
+
+<style>
+  body {
+    margin: 0;
+    background: #1f3d3a;
+    color: #d9f2ef;
+    font-family: Arial, sans-serif;
+  }
+
+  .sala {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
+    padding: 40px;
+  }
+
+  .lado {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .lado img {
+    width: 140px;
+    filter: grayscale(100%);
+    opacity: 0.85;
+  }
+
+  .corazon {
+    max-width: 300px;
+  }
+
+  .corazon img {
+    width: 100%;
+    filter: contrast(110%);
+  }
+</style>
+</head>
+
+<body>
+
+<div class="sala">
+
+  <!-- Izquierda -->
+  <div class="lado">
+    <img src="img/persona1.jpg">
+    <img src="img/persona2.jpg">
+    <img src="img/persona3.jpg">
+  </div>
+
+  <!-- Corazón -->
+  <div class="corazon">
+    <img src="img/corazon.png">
+  </div>
+
+  <!-- Derecha -->
+  <div class="lado">
+    <img src="img/persona4.jpg">
+    <img src="img/persona5.jpg">
+    <img src="img/persona6.jpg">
+  </div>
+
+</div>
+
+</body>
+</html>
