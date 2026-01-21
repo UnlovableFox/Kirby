@@ -63,17 +63,16 @@
         .replace(/\p{Diacritic}/gu, '');
     }
 
-    function checkKey() {
-      const input = normalize(document.getElementById('key').value);
-      const output = document.getElementById('output');
+    function verificarClave() {
+      const valor = document.getElementById("clave")
+        .value
+        .trim()
+        .toLowerCase();
 
-      // Valor esperado (no es la llave en texto plano)
-      const expected = 'origen'.split('').reverse().join('');
-
-      if (input.split('').reverse().join('') === expected) {
-        output.innerText = 'Recompensa: rujlqh'; // "origen" cifrado César +3
+      if (valor === "muerte") {
+        output.innerText = 'Recompensa: rujlqh'; 
       } else {
-        output.innerText = 'Intentalo de nuevo.';
+        output.innerText = 'No es la respuesta que busco...';
       }
     }
 
