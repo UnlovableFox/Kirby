@@ -111,6 +111,28 @@ body {
   display: block;
   filter: sepia(40%) contrast(105%);
 }
+
+.zonas-libres {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.zona-libre {
+  width: 220px;
+  height: 160px;
+  border: 2px dashed rgba(255,255,255,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s;
+}
+
+.zona-libre:hover {
+  background: rgba(255,255,255,0.05);
+}
+  
 </style>
 </head>
   
@@ -122,20 +144,28 @@ body {
 
     <!-- Izquierda -->
     <div class="lado">
+      <div class="zonas-libres">
+      <div class="zona-libre dropzone">
       <div style="text-align:center; margin-top: -120px;">
         <div class="papel-viejo draggable" draggable="true" id="papel1">
           <img src="img/tu-imagen.jpg">
         </div>
       </div>
+      </div>
+      <div class="zona-libre dropzone">
       <div style="text-align:center; margin-top: -120px;">
         <div class="papel-viejo draggable" draggable="true" id="papel2">
           <img src="img/tu-imagen.jpg">
         </div>
       </div>
+      </div>
+      <div class="zona-libre dropzone">
       <div style="text-align:center; margin-top: -120px;">
         <div class="papel-viejo draggable" draggable="true" id="papel3">
           <img src="img/tu-imagen.jpg">
         </div>
+      </div>
+      </div>
       </div>
     </div>
 
@@ -158,26 +188,30 @@ body {
 
     <!-- Derecha -->
     <div class="lado">
+      <div class="zonas-libres">
+      <div class="zona-libre dropzone">
       <div style="text-align:center; margin-top: -120px;">
         <div class="papel-viejo draggable" draggable="true" id="papel4">
           <img src="img/tu-imagen.jpg">
         </div>
       </div>
+      </div>
+      <div class="zona-libre dropzone">
       <div style="text-align:center; margin-top: -120px;">
         <div class="papel-viejo draggable" draggable="true" id="papel5">
           <img src="img/tu-imagen.jpg">
         </div>
       </div>
+      </div>
+      <div class="zona-libre dropzone">
       <div style="text-align:center; margin-top: -120px;">
         <div class="papel-viejo draggable" draggable="true" id="papel6">
           <img src="img/tu-imagen.jpg">
         </div>
       </div>
+      </div>
+      </div>
     </div>
-
-  </div>
-
-</div>
 
 <script>
 function activarLatido() {
