@@ -114,42 +114,6 @@ body {
 </style>
 </head>
   
-<script>
-let elementoArrastrado = null;
-
-document.querySelectorAll(".draggable").forEach(el => {
-  el.addEventListener("dragstart", () => {
-    elementoArrastrado = el;
-    setTimeout(() => el.style.opacity = "0.5", 0);
-  });
-
-  el.addEventListener("dragend", () => {
-    el.style.opacity = "1";
-    elementoArrastrado = null;
-  });
-});
-
-document.querySelectorAll(".dropzone").forEach(zone => {
-  zone.addEventListener("dragover", e => {
-    e.preventDefault();
-    zone.style.outline = "2px dashed rgba(255,255,255,0.3)";
-  });
-
-  zone.addEventListener("dragleave", () => {
-    zone.style.outline = "none";
-  });
-
-  zone.addEventListener("drop", e => {
-    e.preventDefault();
-    zone.style.outline = "none";
-    if (elementoArrastrado) {
-      zone.innerHTML = "";
-      zone.appendChild(elementoArrastrado);
-    }
-  });
-});
-</script>
-  
 <body>
 
 <div class="procedimiento" id="procedimiento">
@@ -225,5 +189,41 @@ function desactivarLatido() {
 }
 </script>
 
+<script>
+let elementoArrastrado = null;
+
+document.querySelectorAll(".draggable").forEach(el => {
+  el.addEventListener("dragstart", () => {
+    elementoArrastrado = el;
+    setTimeout(() => el.style.opacity = "0.5", 0);
+  });
+
+  el.addEventListener("dragend", () => {
+    el.style.opacity = "1";
+    elementoArrastrado = null;
+  });
+});
+
+document.querySelectorAll(".dropzone").forEach(zone => {
+  zone.addEventListener("dragover", e => {
+    e.preventDefault();
+    zone.style.outline = "2px dashed rgba(255,255,255,0.3)";
+  });
+
+  zone.addEventListener("dragleave", () => {
+    zone.style.outline = "none";
+  });
+
+  zone.addEventListener("drop", e => {
+    e.preventDefault();
+    zone.style.outline = "none";
+    if (elementoArrastrado) {
+      zone.innerHTML = "";
+      zone.appendChild(elementoArrastrado);
+    }
+  });
+});
+</script>
+  
 </body>
 </html>
