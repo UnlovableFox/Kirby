@@ -9,10 +9,18 @@
     margin: 0;
     background:
       radial-gradient(circle at 20% 30%, rgba(160,0,0,0.25), transparent 40%),
-      radial-gradient(circle at 80% 60%, rgba(120,0,0,0.12), transparent 45%),
-      linear-gradient(135deg, #050000, #120000);
+      radial-gradient(circle at 80% 60%, rgba(140,0,0,0.15), transparent 45%),
+      linear-gradient(135deg, #040000, #120000);
+    background-size: 200% 200%;
+    animation: venas 18s ease-in-out infinite;
     color: #d9d9d9;
     font-family: Arial, sans-serif;
+  }
+
+  @keyframes venas {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
   }
 
   .sala {
@@ -43,13 +51,43 @@
     width: 100%;
     filter: contrast(110%);
   }
+
+  .corazon img {
+    transition: transform 0.6s ease;
+  }
+
+  .corazon:hover img {
+    transform: scale(1.03);
+  }
+
+/* Palpitación del fondo */
+  .corazon:hover ~ * {
+    animation: none;
+  }
+<div class="procedimiento">
+  .procedimiento {
+    min-height: 100vh;
+  }
+
+  .corazon:hover ~ .procedimiento,
+  .procedimiento:hover {
+    animation: pulso 1.8s ease-in-out infinite;
+  }
+
+  @keyframes pulso {
+    0%   { filter: brightness(1); }
+    50%  { filter: brightness(1.08); }
+    100% { filter: brightness(1); }
+  }
+  </div>
+  
 </style>
 </head>
 
 <body>
 
 <div class="sala">
-
+  
   <!-- Izquierda -->
   <div class="lado">
     <img src="img/persona1.jpg">
@@ -59,7 +97,7 @@
 
   <!-- Corazón -->
   <div class="corazon">
-    <img src="img/corazon.png">
+    <img src="img/corazón.png">
   </div>
 
   <!-- Derecha -->
