@@ -183,12 +183,48 @@ body {
 .zona-libre:hover {
   background: rgba(255,255,255,0.05);
 }
+
+.palabra-secreta {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 42px;
+  letter-spacing: 12px;
+  font-family: "Times New Roman", serif;
+}
+
+.parte {
+  opacity: 1;
+  transition: opacity 1s ease;
+}
+
+.oculto {
+  opacity: 0;
+}
+
+.mensaje {
+  position: absolute;
+  margin-top: 260px;
+  text-align: center;
+  font-size: 18px;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.mensaje.visible {
+  opacity: 1;
+}
   
 </style>
 </head>
   
 <body>
 
+<div class="palabra-secreta">
+  <span id="parte1" class="parte oculto">A</span>
+  <span id="parte2" class="parte oculto">M</span>
+  <span id="parte3" class="parte oculto">O</span>
+</div>
+  
 <div class="procedimiento" id="procedimiento">
 
   <div class="sala">
@@ -226,6 +262,11 @@ body {
       <img src="img/corazon.png">
     </div>
 
+    <div id="mensaje" class="mensaje"></div>
+
+    <img id="final-img" src="img/final.png" style="display:none; cursor:pointer;">
+    <img id="final-img" src="img/final.png" onclick="location.href='secreto.html'">
+      
     <!-- Marco derecho -->
     <div class="marco-retrato dropzone"></div>
 
@@ -265,40 +306,105 @@ function desactivarLatido() {
 <script>
 let elementoArrastrado = null;
 let contenedorOriginal = null;
+let parejasCorrectas = 0;
 
-/* PAPEL VIEJO */
+/* DEFINICIÓN DE PAREJAS */
+const parejas = {
+  marco1: ["papel1", "papel5"], // Maximiliano + Carlota
+  marco2: ["papel2", "papel6"], // Napoleón + Josefina
+  marco3: ["papel3", "papel4"]  // Ejemplo
+};
+
+/* MENSAJES */
+const mensajesCorrectos = [
+  "Un amor que marcó la historia.",
+  "El poder también late.",
+  "Cuando el destino se une."
+];
+
+const mensajeError = "Estos corazones no laten juntos.";
+
+/* DRAG */
 document.querySelectorAll(".papel-viejo").forEach(papel => {
-  papel.addEventListener("dragstart", e => {
+  papel.addEventListener("dragstart", () => {
     elementoArrastrado = papel;
     contenedorOriginal = papel.parentElement;
     setTimeout(() => papel.style.display = "none", 0);
   });
 
-  papel.addEventListener("dragend", e => {
+  papel.addEventListener("dragend", () => {
     papel.style.display = "block";
-    papel.style.cursor = "grab";
-    elementoArrastrado = null;
   });
 });
 
-/* ZONAS Y MARCOS */
-document.querySelectorAll(".zona-libre, .marco-retrato").forEach(zone => {
+/* DROP */
+document.querySelectorAll(".marco-retrato").forEach((marco, index) => {
 
-  zone.addEventListener("dragover", e => {
-    e.preventDefault();
-  });
+  marco.addEventListener("dragover", e => e.preventDefault());
 
-  zone.addEventListener("drop", e => {
+  marco.addEventListener("drop", e => {
     e.preventDefault();
 
-    /* Solo uno por zona */
-    if (zone.querySelector(".papel-viejo")) return;
+    if (marco.children.length === 2) return;
 
-    if (elementoArrastrado) {
-      zone.appendChild(elementoArrastrado);
-    }
+    marco.appendChild(elementoArrastrado);
+
+    setTimeout(() => evaluarPareja(marco, index), 300);
   });
 });
+
+/* EVALUAR */
+function evaluarPareja(marco, index) {
+  const papeles = marco.querySelectorAll(".papel-viejo");
+
+  if (papeles.length < 2) return;
+
+  const ids = Array.from(papeles).map(p => p.id);
+  const correcta = Object.values(parejas)[index].every(id => ids.includes(id));
+
+  if (correcta) {
+    exito(index, papeles);
+  } else {
+    error(papeles);
+  }
+}
+
+function exito(index, papeles) {
+  parejasCorrectas++;
+
+  activarLatido();
+  mostrarMensaje(mensajesCorrectos[index]);
+
+  document.getElementById(`parte${parejasCorrectas}`).classList.remove("oculto");
+
+  papeles.forEach(p => {
+    p.setAttribute("draggable", false);
+    p.style.cursor = "default";
+    setTimeout(() => contenedorOriginal.appendChild(p), 1200);
+  });
+
+  if (parejasCorrectas === 3) {
+    document.getElementById("final-img").style.display = "block";
+  }
+
+  setTimeout(desactivarLatido, 2000);
+}
+
+function error(papeles) {
+  mostrarMensaje(mensajeError);
+
+  papeles.forEach(p => {
+    setTimeout(() => contenedorOriginal.appendChild(p), 1000);
+  });
+}
+
+function mostrarMensaje(texto) {
+  const m = document.getElementById("mensaje");
+  m.innerText = texto;
+  m.classList.add("visible");
+
+  setTimeout(() => m.classList.remove("visible"), 3000);
+}
 </script>
   
 </body>
