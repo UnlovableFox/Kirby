@@ -229,9 +229,9 @@ body {
 <body>
 
 <div class="palabra-secreta">
-  <span id="parte1" class="parte oculto">A</span>
-  <span id="parte2" class="parte oculto">M</span>
-  <span id="parte3" class="parte oculto">O</span>
+  <span id="parte1" class="parte oculto">Dmz</span>
+  <span id="parte2" class="parte oculto">lñqz</span>
+  <span id="parte3" class="parte oculto">cñr</span>
 </div>
 
 <div class="procedimiento" id="procedimiento">
@@ -270,7 +270,7 @@ body {
 
       <img id="final-img"
           src="img/Caeser.png"
-          style="display:none; cursor:pointer; margin-top:20px;"
+          style="max-width: 100px; max-height: 100px; display:none; cursor:pointer; margin-top:20px;"
           onclick="location.href='secreto.html'">
       </div>
 
@@ -326,9 +326,9 @@ const parejas = {
 };
 
 const mensajes = {
-  1: "Un amor que marcó la historia.",
-  2: "El poder también late.",
-  3: "Cuando el destino se une."
+  1: "Dos personas, una historia.",
+  2: "Cartas de amor, cartas del corazón.",
+  3: "Juntos hasta la muerte."
 };
 
 const mensajeError = "Estos corazones no laten juntos.";
@@ -429,13 +429,6 @@ function mostrarMensaje(texto) {
   setTimeout(() => m.classList.remove("visible"), 3000);
 }
 
-function activarLatido() {
-  document.getElementById("procedimiento").classList.add("latido");
-}
-
-function desactivarLatido() {
-  document.getElementById("procedimiento").classList.remove("latido");
-}
 </script>
   
 </body>
