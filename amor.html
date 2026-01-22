@@ -259,6 +259,20 @@ body {
   opacity: 1;
   pointer-events: auto;
 }
+
+#final-img {
+  position: absolute;
+  top: calc(50% + 280px); /* debajo del corazón */
+  left: 50%;
+  transform: translateX(-50%);
+  
+  width: 200px;
+  height: 200px;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s ease;
+}
   
 </style>
 </head>
@@ -311,7 +325,7 @@ body {
 
       <img id="final-img"
           src="img/Caeser.png"
-          style="max-width: 200px; max-height: 200px; display:none; cursor:pointer; margin-top:20px;"
+          style="display:none; cursor:pointer; margin-top:20px;"
           onclick="location.href='https://es.planetcalc.com/1434/#google_vignette'">
       </div>
 
@@ -436,7 +450,9 @@ function exito(num, izq, der, clave) {
 
   if (parejasCompletadas === 3) {
   setTimeout(() => {
-    document.getElementById("final-img").style.display = "block";
+    const finalImg = document.getElementById("final-img");
+    finalImg.style.opacity = "1";
+    finalImg.style.pointerEvents = "auto";
     document.getElementById("btn-volver").classList.add("visible");
   }, 800);
 }
