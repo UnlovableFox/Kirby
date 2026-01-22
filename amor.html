@@ -78,6 +78,7 @@ body {
 
   /* Contenedor corazón + marcos */
 .corazon-con-marcos {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 15px;
@@ -228,6 +229,36 @@ body {
   filter: sepia(80%) grayscale(30%);
   box-shadow: none;
 }
+
+.boton-volver {
+  position: absolute;
+  top: -55px;        /* ajusta fino si quieres */
+  left: 50%;
+  transform: translateX(-50%);
+  
+  padding: 8px 18px;
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+
+  background: rgba(80, 0, 0, 0.85);
+  border: 1px solid rgba(200, 120, 120, 0.4);
+  color: #f0dede;
+
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+
+  box-shadow:
+    inset 0 0 10px rgba(0,0,0,0.6),
+    0 0 15px rgba(120,0,0,0.5);
+}
+
+.boton-volver.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
   
 </style>
 </head>
@@ -270,6 +301,10 @@ body {
     <div class="marco-retrato dropzone" id="marco-izq"></div>
 
     <div class="centro">
+      <button id="btn-volver" class="boton-volver"
+        onclick="location.href='parte2.html'">
+        Volver
+      </button>
       <div class="corazon">
         <img src="img/corazon.png">
       </div>
@@ -400,8 +435,11 @@ function exito(num, izq, der, clave) {
   devolver(der);
 
   if (parejasCompletadas === 3) {
+  setTimeout(() => {
     document.getElementById("final-img").style.display = "block";
-  }
+    document.getElementById("btn-volver").classList.add("visible");
+  }, 800);
+}
 
   setTimeout(desactivarLatido, 2000);
 }
@@ -428,7 +466,12 @@ function mostrarMensaje(texto) {
   const m = document.getElementById("mensaje");
   m.textContent = texto;
   m.classList.add("visible");
-  setTimeout(() => m.classList.remove("visible"), 3000);
+
+  clearTimeout(m._timer);
+
+  m._timer = setTimeout(() => {
+    m.classList.remove("visible");
+  }, 2500);
 }
 
 </script>
