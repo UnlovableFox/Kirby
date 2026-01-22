@@ -224,74 +224,73 @@ body {
   <span id="parte2" class="parte oculto">M</span>
   <span id="parte3" class="parte oculto">O</span>
 </div>
-  
-<div class="procedimiento" id="procedimiento">
 
+<div class="procedimiento" id="procedimiento">
   <div class="sala">
 
-    <!-- Izquierda -->
+    <!-- IZQUIERDA -->
     <div class="lado">
       <div class="zonas-libres">
-      <div class="zona-libre dropzone">
-        <div class="papel-viejo draggable" draggable="true" id="papel1">
-          <img src="img/Maximiliano_de_Habsburgo.jpg">
+        <div class="zona-libre">
+          <div class="papel-viejo" id="papel1" draggable="true" data-origen="1">
+            <img src="img/Maximiliano_de_Habsburgo.jpg">
+          </div>
         </div>
-      </div>
-      <div class="zona-libre dropzone">
-        <div class="papel-viejo draggable" draggable="true" id="papel2">
-          <img src="img/Napoleon_bonaparte.jpg">
+        <div class="zona-libre">
+          <div class="papel-viejo" id="papel2" draggable="true" data-origen="2">
+            <img src="img/Napoleon_bonaparte.jpg">
+          </div>
         </div>
-      </div>
-      <div class="zona-libre dropzone">
-        <div class="papel-viejo draggable" draggable="true" id="papel3">
-          <img src="img/Maximiliano_I.jpg">
+        <div class="zona-libre">
+          <div class="papel-viejo" id="papel3" draggable="true" data-origen="3">
+            <img src="img/Maximiliano_I.jpg">
+          </div>
         </div>
-      </div>
       </div>
     </div>
 
-    <div class="corazon-con-marcos"
-     onmouseenter="activarLatido()"
-     onmouseleave="desactivarLatido()">
+    <!-- CENTRO -->
+    <div class="corazon-con-marcos">
 
-    <!-- Marco izquierdo -->
-    <div class="marco-retrato dropzone"></div>
+      <div class="marco-retrato dropzone" id="marco-izq"></div>
 
-    <!-- Corazón -->
-    <div class="corazon">
-      <img src="img/corazon.png">
+      <div class="corazon">
+        <img src="img/corazon.png">
+      </div>
+
+      <div class="marco-retrato dropzone" id="marco-der"></div>
+
+      <div id="mensaje" class="mensaje"></div>
+
+      <img id="final-img"
+           src="img/final.png"
+           style="display:none; cursor:pointer;"
+           onclick="location.href='secreto.html'">
     </div>
 
-    <div id="mensaje" class="mensaje"></div>
-
-    <img id="final-img" src="img/final.png" style="display:none; cursor:pointer;">
-    <img id="final-img" src="img/final.png" onclick="location.href='secreto.html'">
-      
-    <!-- Marco derecho -->
-    <div class="marco-retrato dropzone"></div>
+    <!-- DERECHA -->
+    <div class="lado">
+      <div class="zonas-libres">
+        <div class="zona-libre">
+          <div class="papel-viejo" id="papel4" draggable="true" data-origen="4">
+            <img src="img/Maria_de_Borgoña.jpg">
+          </div>
+        </div>
+        <div class="zona-libre">
+          <div class="papel-viejo" id="papel5" draggable="true" data-origen="5">
+            <img src="img/Carlota_de_Mexico.jpg">
+          </div>
+        </div>
+        <div class="zona-libre">
+          <div class="papel-viejo" id="papel6" draggable="true" data-origen="6">
+            <img src="img/Josefina_de_Beauharnais.jpg">
+          </div>
+        </div>
+      </div>
+    </div>
 
   </div>
-
-    <!-- Derecha -->
-    <div class="lado">
-      <div class="zonas-libres">
-      <div class="zona-libre dropzone">
-        <div class="papel-viejo draggable" draggable="true" id="papel4">
-          <img src="img/Maria_de_Borgoña.jpg">
-        </div>
-      </div>
-      <div class="zona-libre dropzone">
-        <div class="papel-viejo draggable" draggable="true" id="papel5">
-          <img src="img/Carlota_de_Mexico.jpg">
-        </div>
-      </div>
-      <div class="zona-libre dropzone">
-        <div class="papel-viejo draggable" draggable="true" id="papel6">
-          <img src="img/Josefina_de_Beauharnais.jpg">
-        </div>
-      </div>
-      </div>
-    </div>
+</div>
 
 <script>
 function activarLatido() {
@@ -304,106 +303,115 @@ function desactivarLatido() {
 </script>
 
 <script>
-let elementoArrastrado = null;
-let contenedorOriginal = null;
-let parejasCorrectas = 0;
+let arrastrado = null;
+let parejasCompletadas = 0;
+const yaUsadas = new Set();
 
-/* DEFINICIÓN DE PAREJAS */
 const parejas = {
-  marco1: ["papel1", "papel5"], // Maximiliano + Carlota
-  marco2: ["papel2", "papel6"], // Napoleón + Josefina
-  marco3: ["papel3", "papel4"]  // Ejemplo
+  "papel1-papel5": 1, // Maximiliano + Carlota
+  "papel2-papel6": 2, // Napoleón + Josefina
+  "papel3-papel4": 3  // Maximiliano I + María
 };
 
-/* MENSAJES */
-const mensajesCorrectos = [
-  "Un amor que marcó la historia.",
-  "El poder también late.",
-  "Cuando el destino se une."
-];
+const mensajes = {
+  1: "Un amor que marcó la historia.",
+  2: "El poder también late.",
+  3: "Cuando el destino se une."
+};
 
 const mensajeError = "Estos corazones no laten juntos.";
 
-/* DRAG */
-document.querySelectorAll(".papel-viejo").forEach(papel => {
-  papel.addEventListener("dragstart", () => {
-    elementoArrastrado = papel;
-    contenedorOriginal = papel.parentElement;
-    setTimeout(() => papel.style.display = "none", 0);
+document.querySelectorAll(".papel-viejo").forEach(p => {
+  p.addEventListener("dragstart", () => {
+    arrastrado = p;
+    p.dataset.padre = p.parentElement;
+    setTimeout(() => p.style.display = "none", 0);
   });
 
-  papel.addEventListener("dragend", () => {
-    papel.style.display = "block";
+  p.addEventListener("dragend", () => {
+    p.style.display = "block";
   });
 });
 
-/* DROP */
-document.querySelectorAll(".marco-retrato").forEach((marco, index) => {
+document.querySelectorAll(".dropzone").forEach(zona => {
+  zona.addEventListener("dragover", e => e.preventDefault());
 
-  marco.addEventListener("dragover", e => e.preventDefault());
-
-  marco.addEventListener("drop", e => {
+  zona.addEventListener("drop", e => {
     e.preventDefault();
-
-    if (marco.children.length === 2) return;
-
-    marco.appendChild(elementoArrastrado);
-
-    setTimeout(() => evaluarPareja(marco, index), 300);
+    if (zona.querySelector(".papel-viejo")) return;
+    zona.appendChild(arrastrado);
+    setTimeout(evaluar, 200);
   });
 });
 
-/* EVALUAR */
-function evaluarPareja(marco, index) {
-  const papeles = marco.querySelectorAll(".papel-viejo");
+function evaluar() {
+  const izq = document.querySelector("#marco-izq .papel-viejo");
+  const der = document.querySelector("#marco-der .papel-viejo");
+  if (!izq || !der) return;
 
-  if (papeles.length < 2) return;
+  const clave = `${izq.id}-${der.id}`;
+  const claveInv = `${der.id}-${izq.id}`;
 
-  const ids = Array.from(papeles).map(p => p.id);
-  const correcta = Object.values(parejas)[index].every(id => ids.includes(id));
-
-  if (correcta) {
-    exito(index, papeles);
+  if (parejas[clave] && !yaUsadas.has(clave)) {
+    exito(parejas[clave], izq, der, clave);
+  } else if (parejas[claveInv] && !yaUsadas.has(claveInv)) {
+    exito(parejas[claveInv], izq, der, claveInv);
   } else {
-    error(papeles);
+    fallo(izq, der);
   }
 }
 
-function exito(index, papeles) {
-  parejasCorrectas++;
+function exito(num, izq, der, clave) {
+  yaUsadas.add(clave);
+  parejasCompletadas++;
 
   activarLatido();
-  mostrarMensaje(mensajesCorrectos[index]);
+  mostrarMensaje(mensajes[num]);
+  document.getElementById(`parte${num}`).classList.remove("oculto");
 
-  document.getElementById(`parte${parejasCorrectas}`).classList.remove("oculto");
+  bloquear(izq);
+  bloquear(der);
 
-  papeles.forEach(p => {
-    p.setAttribute("draggable", false);
-    p.style.cursor = "default";
-    setTimeout(() => contenedorOriginal.appendChild(p), 1200);
-  });
+  devolver(izq);
+  devolver(der);
 
-  if (parejasCorrectas === 3) {
+  if (parejasCompletadas === 3) {
     document.getElementById("final-img").style.display = "block";
   }
 
   setTimeout(desactivarLatido, 2000);
 }
 
-function error(papeles) {
+function fallo(izq, der) {
   mostrarMensaje(mensajeError);
+  devolver(izq);
+  devolver(der);
+}
 
-  papeles.forEach(p => {
-    setTimeout(() => contenedorOriginal.appendChild(p), 1000);
-  });
+function devolver(p) {
+  setTimeout(() => {
+    p.dataset.padre.appendChild(p);
+  }, 1000);
+}
+
+function bloquear(p) {
+  p.setAttribute("draggable", false);
+  p.style.cursor = "default";
 }
 
 function mostrarMensaje(texto) {
   const m = document.getElementById("mensaje");
-  m.innerText = texto;
+  m.textContent = texto;
   m.classList.add("visible");
-
   setTimeout(() => m.classList.remove("visible"), 3000);
+}
+
+function activarLatido() {
+  document.getElementById("procedimiento").classList.add("latido");
+}
+
+function desactivarLatido() {
+  document.getElementById("procedimiento").classList.remove("latido");
 }
 </script>
   
