@@ -387,6 +387,9 @@ function exito(num, izq, der, clave) {
   activarLatido();
   mostrarMensaje(mensajes[num]);
 
+  devolver(izq, false);
+  devolver(der, false);
+  
   bloquear(izq);
   bloquear(der);
 
