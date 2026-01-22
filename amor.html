@@ -203,11 +203,14 @@ body {
 
 .mensaje {
   position: absolute;
-  margin-top: 260px;
+  top: calc(50% + 180px);
+  left: 50%;
+  transform: translateX(-50%);
   text-align: center;
   font-size: 18px;
   opacity: 0;
   transition: opacity 0.5s ease;
+  pointer-events: none;
 }
 
 .mensaje.visible {
@@ -324,7 +327,12 @@ const mensajeError = "Estos corazones no laten juntos.";
 document.querySelectorAll(".papel-viejo").forEach(p => {
   p.addEventListener("dragstart", () => {
     arrastrado = p;
-    p.dataset.padre = p.parentElement;
+    
+     if (!p.dataset.origenReal) {
+      p.dataset.origenReal = p.parentElement.id || "";
+      p._origen = p.parentElement;
+    }
+    
     setTimeout(() => p.style.display = "none", 0);
   });
 
@@ -365,6 +373,11 @@ function exito(num, izq, der, clave) {
   yaUsadas.add(clave);
   parejasCompletadas++;
 
+  const letra = document.getElementById(`parte${num}`);
+  requestAnimationFrame(() => {
+    letra.classList.remove("oculto");
+  });
+
   activarLatido();
   mostrarMensaje(mensajes[num]);
   document.getElementById(`parte${num}`).classList.remove("oculto");
@@ -372,8 +385,8 @@ function exito(num, izq, der, clave) {
   bloquear(izq);
   bloquear(der);
 
-  devolver(izq);
-  devolver(der);
+  devolver(izq, true);
+  devolver(der, true);
 
   if (parejasCompletadas === 3) {
     document.getElementById("final-img").style.display = "block";
@@ -384,13 +397,18 @@ function exito(num, izq, der, clave) {
 
 function fallo(izq, der) {
   mostrarMensaje(mensajeError);
-  devolver(izq);
-  devolver(der);
+  devolver(izq, false);
+  devolver(der, false);
 }
 
-function devolver(p) {
+function devolver(p, bloquear = false) {
   setTimeout(() => {
-    p.dataset.padre.appendChild(p);
+    p._origen.appendChild(p);
+
+    if (!bloquear) {
+      p.setAttribute("draggable", true);
+      p.style.cursor = "grab";
+    }
   }, 1000);
 }
 
