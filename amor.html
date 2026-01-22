@@ -222,6 +222,12 @@ body {
   flex-direction: column;
   align-items: center;
 }
+
+.papel-viejo.bloqueado {
+  opacity: 0.6;
+  filter: sepia(80%) grayscale(30%);
+  box-shadow: none;
+}
   
 </style>
 </head>
@@ -390,6 +396,9 @@ function exito(num, izq, der, clave) {
   bloquear(izq);
   bloquear(der);
 
+  devolver(izq);
+  devolver(der);
+
   if (parejasCompletadas === 3) {
     document.getElementById("final-img").style.display = "block";
   }
@@ -399,24 +408,20 @@ function exito(num, izq, der, clave) {
   
 function fallo(izq, der) {
   mostrarMensaje(mensajeError);
-  devolver(izq, false);
-  devolver(der, false);
+  devolver(izq);
+  devolver(der);
 }
-
-function devolver(p, bloquear = false) {
+  
+function devolver(p) {
   setTimeout(() => {
     p._zonaOriginal.appendChild(p);
-
-    if (!bloquear) {
-      p.setAttribute("draggable", true);
-      p.style.cursor = "grab";
-    }
-  }, 1000);
+  }, 800);
 }
 
 function bloquear(p) {
   p.setAttribute("draggable", false);
   p.style.cursor = "default";
+  p.classList.add("bloqueado");
 }
 
 function mostrarMensaje(texto) {
