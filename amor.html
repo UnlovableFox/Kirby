@@ -85,12 +85,13 @@ body {
 
 /* Marco fijo de retrato */
 .marco-retrato {
-  width: 160px;
-  height: 220px;
-  border: 6px solid #3a2a1a;
-  background: #1a1a1a;
-  box-shadow: inset 0 0 25px rgba(0,0,0,0.8);
-  display: flex;
+  padding: 14px;
+  background: #1a0000;
+  box-shadow:
+    inset 0 0 25px rgba(0,0,0,0.7),
+    0 0 20px rgba(120,0,0,0.25);
+  border-radius: 10px;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
 }
@@ -103,6 +104,7 @@ body {
   box-shadow:
     inset 0 0 20px rgba(120,80,40,0.4),
     0 6px 15px rgba(0,0,0,0.6);
+  position: relative;
   cursor: grab;
 }
 
@@ -116,18 +118,23 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 25px;
+  gap: 40px;
   margin-top: 30px;
 }
 
 .zona-libre {
-  width: 220px;
-  height: 160px;
-  border: 2px dashed rgba(255,255,255,0.25);
+  width: 160px;
+  height: 220px;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(0,0,0,0.35), transparent 60%),
+    rgba(30, 0, 0, 0.35);
+  box-shadow:
+    inset 0 0 25px rgba(0,0,0,0.6),
+    0 0 15px rgba(120,0,0,0.15);
+  border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.3s;
 }
 
 .zona-libre:hover {
@@ -227,37 +234,38 @@ function desactivarLatido() {
 <script>
 let elementoArrastrado = null;
 
-document.querySelectorAll(".draggable").forEach(el => {
-  el.addEventListener("dragstart", () => {
-    elementoArrastrado = el;
-    setTimeout(() => el.style.opacity = "0.5", 0);
+/* PAPEL VIEJO */
+document.querySelectorAll(".papel-viejo").forEach(papel => {
+  papel.addEventListener("dragstart", e => {
+    elementoArrastrado = papel;
+    setTimeout(() => papel.style.display = "none", 0);
   });
 
-  el.addEventListener("dragend", () => {
-    el.style.opacity = "1";
+  papel.addEventListener("dragend", e => {
+    papel.style.display = "block";
     elementoArrastrado = null;
   });
 });
 
-document.querySelectorAll(".dropzone").forEach(zone => {
+/* ZONAS / MARCOS */
+document.querySelectorAll(".zona-libre").forEach(zone => {
+
   zone.addEventListener("dragover", e => {
     e.preventDefault();
-    zone.style.outline = "2px dashed rgba(255,255,255,0.3)";
-  });
-
-  zone.addEventListener("dragleave", () => {
-    zone.style.outline = "none";
   });
 
   zone.addEventListener("drop", e => {
     e.preventDefault();
-    zone.style.outline = "none";
 
-  // 🚫 si ya hay un papel dentro, no permitir otro
+    /* ❌ No permitir más de un papel */
     if (zone.querySelector(".papel-viejo")) return;
 
     if (elementoArrastrado) {
       zone.appendChild(elementoArrastrado);
+
+      /* 🔁 Ajustar el marco al tamaño del papel */
+      zone.style.width = "auto";
+      zone.style.height = "auto";
     }
   });
 });
