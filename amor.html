@@ -87,18 +87,18 @@ body {
 .marco-retrato {
   min-width: 80px;
   min-height: 80px;
-  padding: 16px;
+  padding: 18px;
 
   background:
-    linear-gradient(135deg, #2a0000, #0f0000);
-  
-  border: 3px solid #3b0a0a;
-  border-radius: 14px;
+    linear-gradient(145deg, #3a2b1a, #1c1208); /* madera oscura */
+
+  border: 4px solid #5a3b1e;
+  border-radius: 12px;
 
   box-shadow:
-    inset 0 0 30px rgba(0,0,0,0.85),
-    inset 0 0 8px rgba(180,40,40,0.3),
-    0 0 25px rgba(120,0,0,0.35);
+    inset 0 0 18px rgba(0,0,0,0.6),
+    inset 0 0 4px rgba(255,220,180,0.15),
+    0 0 22px rgba(0,0,0,0.6);
 
   display: inline-flex;
   align-items: center;
@@ -107,11 +107,25 @@ body {
   transition: all 0.35s ease;
 }
 
+.marco-retrato:not(:has(.papel-viejo)) {
+  background:
+    repeating-linear-gradient(
+      45deg,
+      #2b1c10,
+      #2b1c10 8px,
+      #24160c 8px,
+      #24160c 16px
+    );
+}
+  
 .marco-retrato:has(.papel-viejo) {
+  background:
+    linear-gradient(145deg, #4a321a, #221508);
+
   box-shadow:
-    inset 0 0 35px rgba(0,0,0,0.9),
-    inset 0 0 12px rgba(255,60,60,0.4),
-    0 0 35px rgba(200,0,0,0.45);
+    inset 0 0 20px rgba(0,0,0,0.7),
+    inset 0 0 10px rgba(255,200,150,0.25),
+    0 0 35px rgba(140,60,20,0.5);
 }
 
 .marco-retrato:hover {
@@ -119,6 +133,10 @@ body {
   box-shadow:
     inset 0 0 35px rgba(0,0,0,0.9),
     0 0 40px rgba(180,0,0,0.5);
+}
+
+.marco-retrato .papel-viejo {
+  margin: 6px;
 }
 
 /* Papel viejo (movible) */
