@@ -154,25 +154,19 @@ body {
     <div class="lado">
       <div class="zonas-libres">
       <div class="zona-libre dropzone">
-      <div style="text-align:center; margin-top: -120px;">
         <div class="papel-viejo draggable" draggable="true" id="papel1">
           <img src="img/Maximiliano_de_Habsburgo.jpg">
         </div>
       </div>
-      </div>
       <div class="zona-libre dropzone">
-      <div style="text-align:center; margin-top: -120px;">
         <div class="papel-viejo draggable" draggable="true" id="papel2">
           <img src="img/Napoleon_bonaparte.jpg">
         </div>
       </div>
-      </div>
       <div class="zona-libre dropzone">
-      <div style="text-align:center; margin-top: -120px;">
         <div class="papel-viejo draggable" draggable="true" id="papel3">
           <img src="img/Maximiliano_I.jpg">
         </div>
-      </div>
       </div>
       </div>
     </div>
@@ -198,25 +192,19 @@ body {
     <div class="lado">
       <div class="zonas-libres">
       <div class="zona-libre dropzone">
-      <div style="text-align:center; margin-top: -120px;">
         <div class="papel-viejo draggable" draggable="true" id="papel4">
           <img src="img/Maria_de_Borgoña.jpg">
         </div>
       </div>
-      </div>
       <div class="zona-libre dropzone">
-      <div style="text-align:center; margin-top: -120px;">
         <div class="papel-viejo draggable" draggable="true" id="papel5">
           <img src="img/Carlota_de_Mexico.jpg">
         </div>
       </div>
-      </div>
       <div class="zona-libre dropzone">
-      <div style="text-align:center; margin-top: -120px;">
         <div class="papel-viejo draggable" draggable="true" id="papel6">
           <img src="img/Josefina_de_Beauharnais.jpg">
         </div>
-      </div>
       </div>
       </div>
     </div>
@@ -233,11 +221,13 @@ function desactivarLatido() {
 
 <script>
 let elementoArrastrado = null;
+let contenedorOriginal = null;
 
 /* PAPEL VIEJO */
 document.querySelectorAll(".papel-viejo").forEach(papel => {
   papel.addEventListener("dragstart", e => {
     elementoArrastrado = papel;
+    contenedorOriginal = papel.parentElement;
     setTimeout(() => papel.style.display = "none", 0);
   });
 
@@ -247,8 +237,8 @@ document.querySelectorAll(".papel-viejo").forEach(papel => {
   });
 });
 
-/* ZONAS / MARCOS */
-document.querySelectorAll(".zona-libre").forEach(zone => {
+/* ZONAS Y MARCOS */
+document.querySelectorAll(".zona-libre, .marco-retrato").forEach(zone => {
 
   zone.addEventListener("dragover", e => {
     e.preventDefault();
@@ -257,15 +247,24 @@ document.querySelectorAll(".zona-libre").forEach(zone => {
   zone.addEventListener("drop", e => {
     e.preventDefault();
 
-    /* ❌ No permitir más de un papel */
+    /* Solo uno por zona */
     if (zone.querySelector(".papel-viejo")) return;
 
     if (elementoArrastrado) {
       zone.appendChild(elementoArrastrado);
-
-      /* 🔁 Ajustar el marco al tamaño del papel */
       zone.style.width = "auto";
       zone.style.height = "auto";
+    }
+  });
+});
+
+/* ⬅️ PERMITIR REGRESAR AL ORIGEN */
+document.querySelectorAll(".zonas-libres").forEach(area => {
+  area.addEventListener("dragover", e => e.preventDefault());
+  area.addEventListener("drop", e => {
+    e.preventDefault();
+    if (contenedorOriginal && elementoArrastrado) {
+      contenedorOriginal.appendChild(elementoArrastrado);
     }
   });
 });
