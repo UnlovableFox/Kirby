@@ -233,6 +233,7 @@ document.querySelectorAll(".papel-viejo").forEach(papel => {
 
   papel.addEventListener("dragend", e => {
     papel.style.display = "block";
+    papel.style.cursor = "grab";
     elementoArrastrado = null;
   });
 });
@@ -252,19 +253,6 @@ document.querySelectorAll(".zona-libre, .marco-retrato").forEach(zone => {
 
     if (elementoArrastrado) {
       zone.appendChild(elementoArrastrado);
-      zone.style.width = "auto";
-      zone.style.height = "auto";
-    }
-  });
-});
-
-/* ⬅️ PERMITIR REGRESAR AL ORIGEN */
-document.querySelectorAll(".zonas-libres").forEach(area => {
-  area.addEventListener("dragover", e => e.preventDefault());
-  area.addEventListener("drop", e => {
-    e.preventDefault();
-    if (contenedorOriginal && elementoArrastrado) {
-      contenedorOriginal.appendChild(elementoArrastrado);
     }
   });
 });
