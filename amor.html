@@ -270,8 +270,8 @@ body {
 
       <img id="final-img"
           src="img/Caeser.png"
-          style="max-width: 100px; max-height: 100px; display:none; cursor:pointer; margin-top:20px;"
-          onclick="location.href='secreto.html'">
+          style="max-width: 200px; max-height: 200px; display:none; cursor:pointer; margin-top:20px;"
+          onclick="location.href='https://es.planetcalc.com/1434/#google_vignette'">
       </div>
 
     <div class="marco-retrato dropzone" id="marco-der"></div>
@@ -387,9 +387,6 @@ function exito(num, izq, der, clave) {
   activarLatido();
   mostrarMensaje(mensajes[num]);
 
-  devolver(izq, false);
-  devolver(der, false);
-  
   bloquear(izq);
   bloquear(der);
 
@@ -399,7 +396,7 @@ function exito(num, izq, der, clave) {
 
   setTimeout(desactivarLatido, 2000);
 }
-
+  
 function fallo(izq, der) {
   mostrarMensaje(mensajeError);
   devolver(izq, false);
