@@ -216,6 +216,12 @@ body {
 .mensaje.visible {
   opacity: 1;
 }
+
+.centro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
   
 </style>
 </head>
@@ -255,20 +261,23 @@ body {
     <!-- CENTRO -->
     <div class="corazon-con-marcos">
 
-      <div class="marco-retrato dropzone" id="marco-izq"></div>
+    <div class="marco-retrato dropzone" id="marco-izq"></div>
 
+    <div class="centro">
       <div class="corazon">
         <img src="img/corazon.png">
       </div>
 
-      <div class="marco-retrato dropzone" id="marco-der"></div>
-
-      <div id="mensaje" class="mensaje"></div>
-
       <img id="final-img"
-           src="img/final.png"
-           style="display:none; cursor:pointer;"
-           onclick="location.href='secreto.html'">
+          src="img/final.png"
+          style="display:none; cursor:pointer; margin-top:20px;"
+          onclick="location.href='secreto.html'">
+      </div>
+
+    <div class="marco-retrato dropzone" id="marco-der"></div>
+
+    <div id="mensaje" class="mensaje"></div>
+
     </div>
 
     <!-- DERECHA -->
@@ -373,20 +382,16 @@ function exito(num, izq, der, clave) {
   yaUsadas.add(clave);
   parejasCompletadas++;
 
-  const letra = document.getElementById(`parte${num}`);
-  requestAnimationFrame(() => {
-    letra.classList.remove("oculto");
-  });
+  document.getElementById(`parte${num}`).classList.remove("oculto");
 
   activarLatido();
   mostrarMensaje(mensajes[num]);
-  document.getElementById(`parte${num}`).classList.remove("oculto");
-
-  bloquear(izq);
-  bloquear(der);
 
   devolver(izq, true);
   devolver(der, true);
+
+  bloquear(izq);
+  bloquear(der);
 
   if (parejasCompletadas === 3) {
     document.getElementById("final-img").style.display = "block";
