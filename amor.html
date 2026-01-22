@@ -203,7 +203,7 @@ body {
 
 .mensaje {
   position: absolute;
-  top: calc(50% + 180px);
+  top: calc(50% + 240px);
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
@@ -234,17 +234,17 @@ body {
     <!-- IZQUIERDA -->
     <div class="lado">
       <div class="zonas-libres">
-        <div class="zona-libre">
+        <div class="zona-libre" id="zona1">
           <div class="papel-viejo" id="papel1" draggable="true" data-origen="1">
             <img src="img/Maximiliano_de_Habsburgo.jpg">
           </div>
         </div>
-        <div class="zona-libre">
+        <div class="zona-libre" id="zona2">
           <div class="papel-viejo" id="papel2" draggable="true" data-origen="2">
             <img src="img/Napoleon_bonaparte.jpg">
           </div>
         </div>
-        <div class="zona-libre">
+        <div class="zona-libre" id="zona3">
           <div class="papel-viejo" id="papel3" draggable="true" data-origen="3">
             <img src="img/Maximiliano_I.jpg">
           </div>
@@ -274,17 +274,17 @@ body {
     <!-- DERECHA -->
     <div class="lado">
       <div class="zonas-libres">
-        <div class="zona-libre">
+        <div class="zona-libre" id="zona4">
           <div class="papel-viejo" id="papel4" draggable="true" data-origen="4">
             <img src="img/Maria_de_Borgoña.jpg">
           </div>
         </div>
-        <div class="zona-libre">
+        <div class="zona-libre" id="zona5">
           <div class="papel-viejo" id="papel5" draggable="true" data-origen="5">
             <img src="img/Carlota_de_Mexico.jpg">
           </div>
         </div>
-        <div class="zona-libre">
+        <div class="zona-libre" id="zona6">
           <div class="papel-viejo" id="papel6" draggable="true" data-origen="6">
             <img src="img/Josefina_de_Beauharnais.jpg">
           </div>
@@ -326,15 +326,15 @@ const mensajeError = "Estos corazones no laten juntos.";
 
 document.querySelectorAll(".papel-viejo").forEach(p => {
   p.addEventListener("dragstart", () => {
-    arrastrado = p;
-    
-     if (!p.dataset.origenReal) {
-      p.dataset.origenReal = p.parentElement.id || "";
-      p._origen = p.parentElement;
+  arrastrado = p;
+
+    if (!p._zonaOriginal) {
+      const zona = p.closest(".zona-libre");
+      p._zonaOriginal = zona;
     }
-    
-    setTimeout(() => p.style.display = "none", 0);
-  });
+
+  setTimeout(() => p.style.display = "none", 0);
+});
 
   p.addEventListener("dragend", () => {
     p.style.display = "block";
@@ -403,7 +403,7 @@ function fallo(izq, der) {
 
 function devolver(p, bloquear = false) {
   setTimeout(() => {
-    p._origen.appendChild(p);
+    p._zonaOriginal.appendChild(p);
 
     if (!bloquear) {
       p.setAttribute("draggable", true);
